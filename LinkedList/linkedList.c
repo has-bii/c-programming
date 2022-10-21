@@ -14,6 +14,7 @@ node *addFront(node *head);
 node *addLast(node *head);
 node *delNode(node *head, int x);
 node *destroyAllNode(node *head);
+void *printReversely(node *head);
 
 int main() {
 
@@ -24,7 +25,7 @@ int main() {
 
     printAll(head);
 
-    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
+    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
     scanf("%d", &N);
 
     while (N != 0)
@@ -48,6 +49,14 @@ int main() {
             head = delNode(head, x);
             break;
         
+        case 4:
+            printf("\nPrinting all nodes reversely-->\n\n");
+
+            printReversely(head);
+
+            printf("\n\n");
+            break;
+
         case 9:
             head = destroyAllNode(head);
             break;
@@ -59,7 +68,7 @@ int main() {
         printf("\n");
         printAll(head);
         printf("\n");
-        printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
+        printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
         scanf("%d", &N);
     }
     
@@ -176,4 +185,14 @@ node *destroyAllNode(node *head){
 
     destroyAllNode(head->next);
     free(head);
+}
+
+void *printReversely(node *head) {
+
+    if (head == NULL)
+        return NULL;
+    
+    printReversely(head->next);
+    printf("%d<--", head->number);
+
 }
