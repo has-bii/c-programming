@@ -11,16 +11,20 @@ typedef struct linkedList node;
 
 void *printAll(node *head);
 node *addFront(node *head);
+node *addLast(node *head);
+node *delNode(node *head, int x);
+node *destroyAllNode(node *head);
 
 int main() {
 
     int N;
+    int x;
 
     node *head = NULL;
 
     printAll(head);
 
-    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n0) Exit\nChoose the program: ");
+    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
     scanf("%d", &N);
 
     while (N != 0)
@@ -33,9 +37,21 @@ int main() {
             break;
         
         case 2:
-            printAll(head);
+            head = addLast(head);
+            break;
+
+        case 3:
+            printf("\nDeleting node-->\n");
+            printf("\nEnter number of node: ");
+            scanf("%d", &x);
+
+            head = delNode(head, x);
             break;
         
+        case 9:
+            head = destroyAllNode(head);
+            break;
+
         default:
             break;
         }
@@ -43,7 +59,7 @@ int main() {
         printf("\n");
         printAll(head);
         printf("\n");
-        printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n0) Exit\nChoose the program: ");
+        printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
         scanf("%d", &N);
     }
     
@@ -82,7 +98,7 @@ node *addFront(node *head) {
     } else {
         node *temp = (node *)malloc(sizeof(node));
 
-        printf("Enter an integer:: ");
+        printf("Enter an integer: ");
         scanf("%d", &temp->number);
 
         temp->next = head;
@@ -90,4 +106,74 @@ node *addFront(node *head) {
     }
     
     return head;
+}
+
+node *addLast(node *head) {
+
+    printf("\nAdding node to the last-->\n");
+
+    node *p = head;
+
+    node *temp = (node *)malloc(sizeof(node));
+    printf("\nEnter an integer: ");
+    scanf("%d", &temp->number);
+
+    temp->next = NULL;
+
+    while (p->next != NULL)
+    {
+        p = p->next;
+    }
+    
+    p->next = temp;
+
+    return head;
+}
+
+node *delNode(node *head, int x) {
+
+    node *p = head;
+    node *deleted;
+
+    if (head->number == x)
+    {
+        deleted = head;
+
+        head = head->next;
+
+        free(deleted);
+    } else
+    {
+        while (p->next->number != x && p->next != NULL)
+        {
+            p = p->next;
+        }
+        
+        if (p->next != NULL)
+        {
+            deleted = p->next;
+
+            p->next = deleted->next;
+
+            free(deleted);
+        } else
+        {
+            deleted = p->next;
+            p->next = NULL;
+
+            free(deleted);
+        }
+           
+    }
+
+    return head;
+}
+
+node *destroyAllNode(node *head){
+
+    if (head == NULL)
+    return NULL;
+
+    destroyAllNode(head->next);
+    free(head);
 }
