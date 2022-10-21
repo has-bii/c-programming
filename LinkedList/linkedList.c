@@ -15,6 +15,7 @@ node *addLast(node *head);
 node *delNode(node *head, int x);
 node *destroyAllNode(node *head);
 void *printReversely(node *head);
+node *sortNode(node *head);
 
 int main() {
 
@@ -25,7 +26,7 @@ int main() {
 
     printAll(head);
 
-    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
+    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n5) Sort all nodes\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
     scanf("%d", &N);
 
     while (N != 0)
@@ -57,6 +58,9 @@ int main() {
             printf("\n\n");
             break;
 
+        case 5:
+            head = sortNode(head);
+
         case 9:
             head = destroyAllNode(head);
             break;
@@ -68,7 +72,7 @@ int main() {
         printf("\n");
         printAll(head);
         printf("\n");
-        printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
+    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n5) Sort all nodes\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
         scanf("%d", &N);
     }
     
@@ -195,4 +199,46 @@ void *printReversely(node *head) {
     printReversely(head->next);
     printf("%d<--", head->number);
 
+}
+
+node *sortNode(node *head){
+
+    node *p = head;
+    node *q = p->next;
+    node *temp;
+
+    while (q != NULL)
+    {
+
+        printf("\n");
+        printAll(head);
+        printf("\n");
+
+        if (p->number > q->number)
+        {
+            if (p == head)
+            {
+                p->next = q->next;
+                q->next = p;
+                head = q;
+
+                p = head;
+                q = p->next;
+            } else if (q->next != NULL)
+            {
+
+
+                
+            }
+
+        } else {
+            temp = p;
+            p = p->next;
+            q = q->next;
+
+        }
+        
+    }
+    
+    return head;
 }
