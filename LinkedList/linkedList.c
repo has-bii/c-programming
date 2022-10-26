@@ -15,7 +15,7 @@ node *addLast(node *head);
 node *delNode(node *head, int x);
 node *destroyAllNode(node *head);
 void *printReversely(node *head);
-void *sortNode(node *head);
+node *sortNode(node *head);
 void swap(node *p, node *q);
 
 int main() {
@@ -60,7 +60,7 @@ int main() {
             break;
 
         case 5:
-            sortNode(head);
+            head = sortNode(head);
 
         case 9:
             head = destroyAllNode(head);
@@ -88,7 +88,7 @@ void *printAll(node *head) {
     if (p == NULL)
     {
         printf("\nThere is no node!\n");
-    } else if (p != NULL)
+    } else
     {
         while (p != NULL)
         {
@@ -213,7 +213,7 @@ void *printReversely(node *head) {
 
 }
 
-void *sortNode(node *head){
+node *sortNode(node *head){
 
     int swapped;
     node *p = head;
