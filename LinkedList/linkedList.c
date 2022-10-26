@@ -15,7 +15,8 @@ node *addLast(node *head);
 node *delNode(node *head, int x);
 node *destroyAllNode(node *head);
 void *printReversely(node *head);
-node *sortNode(node *head);
+void *sortNode(node *head);
+void swap(node *p, node *q);
 
 int main() {
 
@@ -59,7 +60,7 @@ int main() {
             break;
 
         case 5:
-            head = sortNode(head);
+            sortNode(head);
 
         case 9:
             head = destroyAllNode(head);
@@ -72,7 +73,7 @@ int main() {
         printf("\n");
         printAll(head);
         printf("\n");
-    printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n5) Sort all nodes\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
+        printf("\n1) Add node to the front\n2) Add node to the last\n3) Delete node\n4) Print all nodes reversely\n5) Sort all nodes\n9) Destroy all nodes\n0) Exit\nChoose the program: ");
         scanf("%d", &N);
     }
     
@@ -82,16 +83,18 @@ int main() {
 
 void *printAll(node *head) {
     
-    if (head == NULL)
+    node *p = head;
+
+    if (p == NULL)
     {
         printf("\nThere is no node!\n");
-    } else if (head != NULL)
+    } else if (p != NULL)
     {
-        while (head != NULL)
+        while (p != NULL)
         {
-        printf("%d-->", head->number);
-        head = head->next;
-        }
+            printf("%d-->", p->number);
+            p = p->next;
+        } 
     }
     
 }
@@ -123,23 +126,32 @@ node *addFront(node *head) {
 
 node *addLast(node *head) {
 
-    printf("\nAdding node to the last-->\n");
-
-    node *p = head;
-
-    node *temp = (node *)malloc(sizeof(node));
-    printf("\nEnter an integer: ");
-    scanf("%d", &temp->number);
-
-    temp->next = NULL;
-
-    while (p->next != NULL)
+    if (head != NULL)
     {
-        p = p->next;
+        printf("\nAdding node to the last-->\n");
+
+        node *p = head;
+
+        node *temp = (node *)malloc(sizeof(node));
+        printf("\nEnter an integer: ");
+        scanf("%d", &temp->number);
+
+        temp->next = NULL;
+
+        while (p->next != NULL)
+        {
+            p = p->next;
+        }
+        
+        p->next = temp;
+
+        return head;
+    } else
+    {
+        head = addFront(head);
     }
     
-    p->next = temp;
-
+    
     return head;
 }
 
@@ -201,44 +213,35 @@ void *printReversely(node *head) {
 
 }
 
-node *sortNode(node *head){
+void *sortNode(node *head){
 
+    int swapped;
     node *p = head;
-    node *q = p->next;
-    node *temp;
+    node *q = NULL;
 
-    while (q != NULL)
+    do
     {
+        swapped = 0;
+        p = head;
 
-        printf("\n");
-        printAll(head);
-        printf("\n");
-
-        if (p->number > q->number)
+        while (p->next != NULL)
         {
-            if (p == head)
+            if (p->number > p->next->number)
             {
-                p->next = q->next;
-                q->next = p;
-                head = q;
-
-                p = head;
-                q = p->next;
-            } else if (q->next != NULL)
-            {
-
-
-                
+                swap(p, p->next);
+                swapped = 1;
             }
-
-        } else {
-            temp = p;
             p = p->next;
-            q = q->next;
-
         }
-        
-    }
+        q = p;
+    } while (swapped);
+    
     
     return head;
+}
+
+void swap(node *p, node *q) {
+    int temp = p->number;
+    p->number = q->number;
+    q->number = temp;
 }
