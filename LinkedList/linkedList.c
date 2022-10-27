@@ -15,7 +15,7 @@ node *addLast(node *head);
 node *delNode(node *head, int x);
 node *destroyAllNode(node *head);
 void *printReversely(node *head);
-node *sortNode(node *head);
+void *sortNode(node *head);
 void swap(node *p, node *q);
 
 int main() {
@@ -60,7 +60,8 @@ int main() {
             break;
 
         case 5:
-            head = sortNode(head);
+            sortNode(head);
+            break;
 
         case 9:
             head = destroyAllNode(head);
@@ -83,17 +84,17 @@ int main() {
 
 void *printAll(node *head) {
     
-    node *p = head;
+    node *temp = head;
 
-    if (p == NULL)
+    if (temp == NULL)
     {
         printf("\nThere is no node!\n");
     } else
     {
-        while (p != NULL)
+        while (temp != NULL)
         {
-            printf("%d-->", p->number);
-            p = p->next;
+            printf("%d-->", temp->number);
+            temp = temp->next;
         } 
     }
     
@@ -160,7 +161,10 @@ node *delNode(node *head, int x) {
     node *p = head;
     node *deleted;
 
-    if (head->number == x)
+    if (head == NULL)
+    {
+        printf("\nThe node is empty\n");
+    } else if (head->number == x)
     {
         deleted = head;
 
@@ -213,31 +217,37 @@ void *printReversely(node *head) {
 
 }
 
-node *sortNode(node *head){
+void *sortNode(node *head){
 
-    int swapped;
     node *p = head;
     node *q = NULL;
 
+        printf("\nThe node is being sorted-->\n");
+
+        printf("\n");
+        printAll(head);
+        printf("\n");
+
     do
     {
-        swapped = 0;
-        p = head;
 
-        while (p->next != NULL)
+        if (p->number > p->next->number)
         {
-            if (p->number > p->next->number)
-            {
-                swap(p, p->next);
-                swapped = 1;
-            }
+            swap(p, p->next);
+            p = head;
+
+            printf("\n");
+            printAll(head);
+            printf("\n");
+
+        } else 
+        {
             p = p->next;
         }
-        q = p;
-    } while (swapped);
-    
-    
-    return head;
+        
+    } while (p->next != NULL);
+
+    printf("\nThe node has been sorted.\n");
 }
 
 void swap(node *p, node *q) {
