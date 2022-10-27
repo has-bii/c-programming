@@ -1,1 +1,2 @@
-# c-programming
+# C-Programming
+Data Structure Lecture
