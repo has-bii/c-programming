@@ -172,26 +172,18 @@ node *delNode(node *head, int x) {
         free(deleted);
     } else
     {
-        while (p->next->number != x && p->next != NULL)
+        do
         {
+            if (p->next->number == x)
+            {
+                deleted = p->next;
+                p->next = deleted->next;
+
+                free(deleted);
+            }
+            
             p = p->next;
-        }
-        
-        if (p->next != NULL)
-        {
-            deleted = p->next;
-
-            p->next = deleted->next;
-
-            free(deleted);
-        } else
-        {
-            deleted = p->next;
-            p->next = NULL;
-
-            free(deleted);
-        }
-           
+        } while (p->next != NULL);
     }
 
     return head;
