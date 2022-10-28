@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct doubleLinkedList
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct doubleLinkedList *next;
+    struct doubleLinkedList *prev;
 };
 
-typedef struct node node;
+typedef struct doubleLinkedList node;
 
 void *printAll(node *head);
 node *addFront(node *head);
@@ -239,7 +239,6 @@ void *printReversely(node *head) {
 void *sortNode(node *head){
 
     node *p = head;
-    node *q = NULL;
 
         printf("\nThe node is being sorted----->\n");
 
