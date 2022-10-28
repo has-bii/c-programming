@@ -20,8 +20,7 @@ void swap(node *p, node *q);
 
 int main() {
 
-    int N;
-    int x;
+    int N, x;
 
     node *head = NULL;
 
@@ -86,7 +85,7 @@ void *printAll(node *head) {
     
     node *temp = head;
 
-    if (temp == NULL)
+    if (head == NULL)
     {
         printf("\nThere is no node!\n");
     } else
@@ -200,11 +199,16 @@ node *delNode(node *head, int x) {
 
 node *destroyAllNode(node *head){
 
-    if (head == NULL)
-    return NULL;
+    node *deleted;
 
-    destroyAllNode(head->next);
-    free(head);
+    while (head != NULL)
+    {
+        deleted = head;
+        head = head->next;
+        free(deleted);
+    }
+
+    return head;
 }
 
 void *printReversely(node *head) {
