@@ -1,7 +1,4 @@
 -README.md
 .vscode/tasks.json
-LinkedList/linkedList.exe
 Testing/testing.c
-Testing/testing.exe
-DoubleLinkedList/doubleLinkedList.exe
-CircularLinkedList/circularLinkedList.exe
+*.exe
