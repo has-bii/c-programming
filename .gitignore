@@ -2,3 +2,4 @@
 .vscode/tasks.json
 Testing/testing.c
 *.exe
+Programs/Postfix/postfixStack.c
