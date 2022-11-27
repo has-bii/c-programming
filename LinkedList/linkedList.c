@@ -9,7 +9,7 @@ struct linkedList
 
 typedef struct linkedList node;
 
-void *printAll(node *head);
+void printAll(node *head);
 node *addFront(node *head);
 node *addLast(node *head);
 node *delNode(node *head, int x);
@@ -81,7 +81,7 @@ int main() {
     return 0;
 }
 
-void *printAll(node *head) {
+void printAll(node *head) {
     
     node *temp = head;
 
