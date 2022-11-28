@@ -129,23 +129,65 @@ node *destroy(node *head)
     }
 }
 
+node *insertInOrderly(node *head, int x)
+{
+    node *temp = (node *)malloc(sizeof(node));
+    temp->data = x;
+
+    if (head == NULL)
+    {
+        temp->next = temp->prev = NULL;
+        head = temp;
+    } else if (x < head->data)
+    {
+        temp->next = head;
+        temp->prev = NULL;
+        head->prev = temp;
+        head = temp;
+    } else if (head->next == NULL)
+    {
+        head->next = temp;
+        temp->next = NULL;
+        temp->prev = head;
+    } else
+    {
+        node *p = head;
+
+        while (p->next != NULL)
+        {
+            if (p->next->data > temp->data)
+            {
+                temp->next =  p->next;
+                p->next->prev = temp;
+                p->next = temp;
+
+                return head;
+            }
+            
+            p = p->next;
+        }
+        
+        p->next = temp;
+        temp->prev = p;
+        temp->next = NULL;
+    }
+    
+    return head;
+}
+
 int main() {
 
     node *head = NULL;
 
     printAll(head);
 
-    head = addFront(head, 20);
-    head = addFront(head, 10);
-    head = addLast(head, 30);
-
-    printAll(head);
-
-    head = delNode(head, 30);
-
-    printAll(head);
-
-    head = destroy(head);
+    head = insertInOrderly(head, 10);
+    head = insertInOrderly(head, 30);
+    head = insertInOrderly(head, 50);
+    head = insertInOrderly(head, 20);
+    head = insertInOrderly(head, 80);
+    head = insertInOrderly(head, 60);
+    head = insertInOrderly(head, 100);
 
     printAll(head);
 

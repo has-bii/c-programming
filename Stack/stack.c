@@ -23,6 +23,7 @@ int isFull(stack *s);
 int isEmpty(stack *s);
 void push(stack *s, int x);
 int pop(stack *s);
+void printReversely(node *p);
 
 // Main code
 
@@ -36,18 +37,8 @@ int main() {
     push(s, 10);
     push(s, 20);
     push(s, 30);
-    push(s, 40);
 
-    x = pop(s);
-    printf("\n1. %d", x);
-
-    x = pop(s);
-    printf("\n2. %d", x);
-
-    x = pop(s);
-    printf("\n3. %d", x);
-
-    x = pop(s);
+    printReversely(s->top);
 
     return 0;
 }
@@ -106,5 +97,16 @@ int pop(stack *s)
         s->counter--;
 
         return x;
+    }
+}
+
+void printReversely(node *p)
+{
+    if (p == NULL)
+    {}
+    else
+    {
+        printReversely(p->next);
+        printf("\n%d", p->data);
     }
 }

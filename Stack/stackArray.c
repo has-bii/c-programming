@@ -28,16 +28,7 @@ int main() {
     push(s, 30);
     push(s, 40);
 
-    x = pop(s);
-    printf("\n1. %d", x);
-
-    x = pop(s);
-    printf("\n2. %d", x);
-
-    x = pop(s);
-    printf("\n3. %d", x);
-
-    x = pop(s);
+    
 
     return 0;
 }

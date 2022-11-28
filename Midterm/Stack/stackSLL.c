@@ -71,10 +71,7 @@ int main() {
     push(&s, 40);
     push(&s, 50);
 
-    printf("%d\n", pop(&s));
-    printf("%d\n", pop(&s));
-    printf("%d\n", pop(&s));
-    printf("%d\n", pop(&s));
+    printReversely(&s.top);
 
     return 0;
 }
