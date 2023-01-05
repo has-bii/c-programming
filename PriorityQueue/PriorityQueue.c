@@ -1,6 +1,8 @@
 #include <stdio.h>
 #define MAX_QUEUE 10
 
+// PRIORITY QUEUE by using an Array
+
 struct priority_queue{
     int A[MAX_QUEUE];
     int cnt;
