@@ -39,8 +39,12 @@ void print(pqueue *p){
     if (p->cnt == 0)
         printf("Queue is empty.");
     else {
-        for (int i = 1; i < MAX_QUEUE; i++)
+        printf("\n");
+
+        for (int i = 1; i <= p->cnt; i++)
             printf("%4d", p->A[i]);
+
+        printf("\n");
     }
 }
 
@@ -52,15 +56,17 @@ int delete(pqueue *p){
 
         p->A[1] = p->A[p->cnt];
 
+        p->cnt--;
+
         int iter = 1;
         while (iter*2 <= p->cnt && (p->A[iter] > p->A[iter*2] || p->A[iter] > p->A[iter*2+1])){
 
             if (p->A[iter*2] < p->A[iter*2+1])
             {
-                swap(&p->A[iter*2], p->A[iter]);
+                swap(&p->A[iter*2], &p->A[iter]);
                 iter = iter*2;
             } else {
-                swap(&p->A[iter*2+1], p->A[iter]);
+                swap(&p->A[iter*2+1], &p->A[iter]);
                 iter = iter*2+1;
             }
 
@@ -68,4 +74,29 @@ int delete(pqueue *p){
 
         return temp;
     }
+}
+
+int main(){
+
+    pqueue p;
+
+    initialize(&p);
+
+    insert(&p, 1);
+    insert(&p, 2);
+    insert(&p, 3);
+    insert(&p, 4);
+    insert(&p, 5);
+    insert(&p, 6);
+    insert(&p, 7);
+    insert(&p, 8);
+    insert(&p, 9);
+
+    print(&p);
+
+    printf("\nDeleted Key: %d", delete(&p));
+
+    print(&p);
+
+    return 0;
 }
